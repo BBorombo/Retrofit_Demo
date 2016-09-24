@@ -8,15 +8,19 @@ import android.widget.TextView;
 
 import com.borombo.demo.retrofitdemo.model.FOAASOperation;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Phantom on 24/09/2016.
  */
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
+class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
-    private ArrayList<FOAASOperation> operations;
+    private List<FOAASOperation> operations;
+
+    MyAdapter(List<FOAASOperation> operations){
+        this.operations = operations;
+    }
 
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,20 +40,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         return operations.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView name;
         private final TextView fields;
 
         private FOAASOperation currentOperation;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
             fields = (TextView) itemView.findViewById(R.id.fields);
         }
 
-        public void display( FOAASOperation operation){
+        void display( FOAASOperation operation){
             currentOperation = operation;
             name.setText(operation.getName());
             fields.setText(operation.getTextField());
